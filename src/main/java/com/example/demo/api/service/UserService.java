@@ -1,26 +1,44 @@
 package com.example.demo.api.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+// import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.api.model.User;
+// import com.example.demo.api.repository.TaskRepository;
+import com.example.demo.api.repository.UserRepository;
+import com.example.demo.api.model.Task;
 
 @Service
 public class UserService {
     private List<User> userList;
+    @Autowired
+    private UserRepository userRepository;
+    // @Autowired
+    // private TaskRepository taskRepository;
 
-    //constructor
-    public UserService(){
-        userList = new ArrayList<>();
-        User user1 = new User(0, "John", "John@gmail.com");
-        User user2 = new User(1, "Jeff", "Jeff@gmail.com");
-        User user3 = new User(2,"Steve", "Steve@gmail.com");
-        
-        userList.addAll(Arrays.asList(user1,user2,user3));
+    public void createUser(User user){
+        userRepository.save(user);
     }
+
+    public void createTask(Task task, Long userId){
+        User user = userRepository.findById(userId).orElseThrow();
+        user.getTasks().add(task);
+        userRepository.save(user);
+    }
+
+    public User getUser(Long userId){
+        return userRepository.findById(userId).orElseThrow();
+    }
+
+    // public List<Task> getTasks(Long userId){
+    //     User user = userRepository.findById(userId).orElseThrow();
+    //     return user.getTasks();
+    //     return taskRepository.findByUser(user);
+    // }
+
 
     public User getUser(Integer id){
         for(int i = 0; i < userList.size(); i++){
@@ -34,4 +52,5 @@ public class UserService {
     public List<User> getUsers(){
         return userList;
     }
+
 }
