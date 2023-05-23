@@ -7,56 +7,50 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.lang.Nullable;
-
 @Entity
-public class User{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Nullable
     private Integer id;
     private String name;
     private String email;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks;
 
-    public User(){}
+    public User() {}
 
-    public User(Integer id, String name, String email){
-        this.id = id;
-        this.name = name;
-        this.email = email;
-    }
-
-    public Integer getId(){
+    public Integer getId() {
         return this.id;
     }
 
-    public String getName(){
-        return this.name;
-    }
-
-    public String getEmail(){
-        return this.email;
-    }
-    
-    public void setId(Integer id){
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setName(String name){
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setEmail(String email){
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public List<Task> getTasks(){
+    public List<Task> getTasks() {
         return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }
