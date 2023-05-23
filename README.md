@@ -1,13 +1,13 @@
-# Heading1 Todo Application API<br>
+# Heading1 ***Todo Application API***<br>
 This repository contains the backend code for a Todo Application API. The API allows multiple users to create, update, delete, and manage their todo lists. It provides a simple and intuitive interface for interacting with todo items.
 
-**Features**<br>
+# Heading2 **Features**<br>
 Create a new todo item.
 Update an existing todo item's name.
 Delete a todo item.
 Get a list of all todo items.
 
-**Technologies Used**<br>
+# Heading2 **Technologies Used**<br>
 The Todo Application API is built using the following technologies:<br>
 
 Java: The backend is written in Java<br>
@@ -16,7 +16,7 @@ Spring Data JPA: Spring Data JPA is used to simplify database operations and int
 MySQL: MySQL is used as the database for storing todo items and user information.<br>
 Maven: Maven is used as the build automation tool and dependency management system for the project.<br>
 
-**Getting Started**<br>
+# Heading2 **Getting Started**<br>
 To get started with the Todo Application API, follow these steps:<br>
 
 Clone the repository: ```git clone git@github.com:tate-minch-bw/Tate-To-Do-App-API.git```<br>
@@ -27,7 +27,7 @@ Update the database connection settings in the application.properties file.<br>
 Start the server: ```mvn run```<br>
 The API will now be accessible at http://localhost:8080 (or the port specified in the application.properties file).<br>
 
-API Endpoints<br>
+# Heading2 **API Endpoints**<br>
 The following API endpoints are available:<br>
 
 GET /user/{userId}: get a user by ID<br>
