@@ -8,6 +8,7 @@ import com.example.demo.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,25 +19,35 @@ public class UserService {
     private TaskRepository taskRepository;
 
     public User getUser(Integer userId) {
-        return userRepository.findById(userId).orElseThrow();
+        return userRepository.findById(userId).orElse(null);
     }
 
     public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-    public void createUser(User user) {
-        userRepository.save(user);
+    public User createUser(User user) {
+        if(user != null){
+            userRepository.save(user);
+        }
+        return user;
     }
 
-    public void deleteUser(Integer userId){
-        User user = userRepository.findById(userId).orElseThrow();
-        userRepository.delete(user);
+    public User deleteUser(Integer userId){
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null){
+            userRepository.delete(user);
+        }
+        return user;
     }
     
     public List<Task> getTasks(Integer userId) {
-        User user = userRepository.findById(userId).orElseThrow();
-        return user.getTasks();
+        List<Task> tasks = new ArrayList<>(0);
+        User user = userRepository.findById(userId).orElse(null);
+        if(user != null){
+            tasks = user.getTasks();
+        }
+        return tasks;
     }
 
     public Task getTask(Integer userId, Integer taskId){
@@ -63,9 +74,12 @@ public class UserService {
         return updatedTask;
     }
 
-    public void createTask(Task task, Integer userId) {
-        User user = userRepository.findById(userId).orElseThrow();
+    public Task createTask(Task task, Integer userId) {
+        User user = userRepository.findById(userId).orElse(null);
         task.setUser(user);
-        taskRepository.save(task);
+        if(user != null){
+            taskRepository.save(task);
+        }
+        return task;
     }
 }

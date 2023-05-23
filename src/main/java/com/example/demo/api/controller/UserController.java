@@ -25,37 +25,39 @@ public class UserController {
     }
 
     @GetMapping(value = "/user/{userId}")
-    public User getUser(@PathVariable String userId) {
-        try {
-            return userService.getUser(Integer.valueOf(userId));
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
+    public ResponseEntity<User> getUser(@PathVariable String userId) {
+        User user = userService.getUser(Integer.valueOf(userId));
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
     @GetMapping(value = "/users")
-    public List<User> getUsers() {
-        return userService.getUsers();
+    public ResponseEntity<List<User>> getUsers() {
+        List<User> listOfUsers = userService.getUsers();
+        return listOfUsers.size() != 0 ? ResponseEntity.ok(listOfUsers) : ResponseEntity.notFound().build();
     }
 
     @PostMapping(value = "/user")
-    public void createUser(@RequestBody User user) {
-        userService.createUser(user);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User createdUser = userService.createUser(user);
+        return createdUser != null ? ResponseEntity.ok(createdUser) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping(value = "/user/{userId}")
-    public void deleteUser(@PathVariable String userId) {
-        userService.deleteUser(Integer.valueOf(userId));
+    public ResponseEntity<User> deleteUser(@PathVariable String userId) {
+        User deletedUser = userService.deleteUser(Integer.valueOf(userId));
+        return deletedUser != null ? ResponseEntity.ok(deletedUser) : ResponseEntity.notFound().build();
     }
 
     @PostMapping(value = "/user/{userId}/task")
-    public void createTask(@RequestBody Task task, @PathVariable String userId) {
-        userService.createTask(task, Integer.valueOf(userId));
+    public ResponseEntity<Task> createTask(@RequestBody Task task, @PathVariable String userId) {
+        Task createdTask = userService.createTask(task, Integer.valueOf(userId));
+        return createdTask.getUser() != null ? ResponseEntity.ok(createdTask) : ResponseEntity.notFound().build();
     }
 
     @GetMapping(value = "/user/{userId}/tasks")
-    public List<Task> getTasks(@PathVariable String userId) {
-        return userService.getTasks(Integer.valueOf(userId));
+    public ResponseEntity<List<Task>> getTasks(@PathVariable String userId) {
+        List<Task> userTasks = userService.getTasks(Integer.valueOf(userId));
+        return userTasks.size() != 0 ? ResponseEntity.ok(userTasks) : ResponseEntity.notFound().build();
     }
 
     @GetMapping(value = "/user/{userId}/task/{taskId}")
