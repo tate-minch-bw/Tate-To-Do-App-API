@@ -5,7 +5,6 @@ import com.example.demo.api.model.User;
 import com.example.demo.api.repository.TaskRepository;
 import com.example.demo.api.repository.UserRepository;
 
-import org.hibernate.engine.internal.Nullability.NullabilityCheckType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
