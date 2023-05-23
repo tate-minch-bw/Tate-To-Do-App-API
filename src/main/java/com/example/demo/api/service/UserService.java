@@ -16,27 +16,31 @@ public class UserService {
     @Autowired
     private TaskRepository taskRepository;
 
+    public User getUser(Long userId) {
+        return userRepository.findById(userId).orElseThrow();
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
+
     public void createUser(User user) {
         userRepository.save(user);
+    }
+
+    public void deleteUser(Long userId){
+        User user = userRepository.findById(userId).orElseThrow();
+        userRepository.delete(user);
+    }
+    
+    public List<Task> getTasks(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        return user.getTasks();
     }
 
     public void createTask(Task task, Long userId) {
         User user = userRepository.findById(userId).orElseThrow();
         task.setUser(user);
         taskRepository.save(task);
-    }
-
-    public User getUser(Long userId) {
-        return userRepository.findById(userId).orElseThrow();
-    }
-
-    public List<Task> getTasks(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow();
-        return user.getTasks();
-    }
-
-
-    public List<User> getUsers() {
-        return userRepository.findAll();
     }
 }
