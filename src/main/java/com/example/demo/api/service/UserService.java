@@ -16,7 +16,7 @@ public class UserService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public User getUser(Long userId) {
+    public User getUser(Integer userId) {
         return userRepository.findById(userId).orElseThrow();
     }
 
@@ -28,17 +28,32 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void deleteUser(Long userId){
+    public void deleteUser(Integer userId){
         User user = userRepository.findById(userId).orElseThrow();
         userRepository.delete(user);
     }
     
-    public List<Task> getTasks(Long userId) {
+    public List<Task> getTasks(Integer userId) {
         User user = userRepository.findById(userId).orElseThrow();
         return user.getTasks();
     }
 
-    public void createTask(Task task, Long userId) {
+    public Task getTask(Integer userId, Integer taskId){
+        Task task = new Task();
+        task = taskRepository.findByIdAndUserId(taskId, userId);
+        return task;
+    }
+
+    public Task deleteTask(Integer userId, Integer taskId){
+        Task task = new Task();
+        task = taskRepository.findByIdAndUserId(taskId, userId);
+        if(task != null){
+            taskRepository.delete(task);
+        }
+        return task;
+    }
+
+    public void createTask(Task task, Integer userId) {
         User user = userRepository.findById(userId).orElseThrow();
         task.setUser(user);
         taskRepository.save(task);
