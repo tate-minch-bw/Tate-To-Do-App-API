@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,11 +22,6 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
-    }
-
-    @GetMapping(value = "/")
-    public String getMessage() {
-        return "<h1>Hello, world!</h1>";
     }
 
     @GetMapping(value = "/user/{userId}")
@@ -73,5 +69,10 @@ public class UserController {
         Task task = userService.deleteTask(Integer.valueOf(userId),Integer.valueOf(taskId));
         return task != null ? ResponseEntity.ok(task) : ResponseEntity.notFound().build();
     }
-    //update task
+
+    @PutMapping(value = "/user/{userId}/task/{taskId}")
+    public ResponseEntity<Task> updateTask(@RequestBody Task task, @PathVariable String taskId){
+        Task updatedTask = userService.updateTask(task, Integer.valueOf(taskId));
+        return updatedTask != null ? ResponseEntity.ok(updatedTask) : ResponseEntity.notFound().build();
+    }
 }

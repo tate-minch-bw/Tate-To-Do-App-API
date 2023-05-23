@@ -17,7 +17,7 @@ public class User {
     private String name;
     private String email;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Task> tasks;
 
     public User() {}
