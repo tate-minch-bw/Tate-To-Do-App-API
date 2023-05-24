@@ -22,7 +22,7 @@ To get started with the Todo Application API, follow these steps:<br>
 Clone the repository: ```git clone git@github.com:tate-minch-bw/Tate-To-Do-App-API.git```<br>
 Install the required dependencies using Maven: ```mvn install```<br>
 Set up the database:<br>
-Install MySQL and create a new database.<br>
+Install MySQL and ensure ```spring.jpa.hibernate.ddl-auto=create``` is present in application.propetries file.<br>
 Update the database connection settings in the application.properties file.<br>
 Start the server: ```mvn run```<br>
 The API will now be accessible at http://localhost:8080 (or the port specified in the application.properties file).<br>
