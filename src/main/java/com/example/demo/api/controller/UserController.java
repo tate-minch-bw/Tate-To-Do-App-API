@@ -5,6 +5,7 @@ import com.example.demo.api.model.User;
 import com.example.demo.api.service.UserService;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UserController {
 
@@ -29,7 +31,7 @@ public class UserController {
         User user = userService.getUser(Integer.valueOf(userId));
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
-
+    
     @GetMapping(value = "/users")
     public ResponseEntity<List<User>> getUsers() {
         List<User> listOfUsers = userService.getUsers();
