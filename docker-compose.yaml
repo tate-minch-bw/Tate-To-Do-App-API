@@ -15,9 +15,10 @@ services:
       - "3307:3306"
 
   todo-app:
-    image: bandwidth-docker.jfrog.io/todo-app:1.0 
-    # restart: always
-    environment:
-      XMX: 512M
+    build:
+        context: .
+        dockerfile: Dockerfile
+    image: openjdk:17
+    restart: always
     ports:
-      - "8080:8080"   
+      - "8080:8080"
