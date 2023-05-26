@@ -74,7 +74,6 @@
                             <executable>bash</executable>
                             <arguments>
                                 <argument>${basedir}/scripts/build_docker.sh</argument>
-                                <!-- <argument>bandwidth-docker.jfrog.io/bwi-spring-boot-template-java-17:1.0.0</argument> -->
                                 <argument>openjdk:17</argument>
                                 <argument>${project.artifactId}-${project.version}</argument>
                                 <argument>bandwidth-docker.jfrog.io</argument>
