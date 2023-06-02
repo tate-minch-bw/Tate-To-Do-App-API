@@ -1,3 +1,4 @@
+#!/bin/bash
 cd ..
-mvn install -DskipTests
+mvn compile jib:dockerBuild
 docker compose up --build
