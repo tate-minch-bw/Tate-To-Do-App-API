@@ -15,7 +15,7 @@ services:
       - "3307:3306"
 
   todo-app:
-    image: openjdk:17
+    image: todo-app:0.0.1-SNAPSHOT
     restart: always
     ports:
       - "8080:8080"
