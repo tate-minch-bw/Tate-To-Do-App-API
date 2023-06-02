@@ -73,7 +73,7 @@ public class UserService {
         }
         return updatedTask;
     }
-
+    
     public Task createTask(Task task, Integer userId) {
         User user = userRepository.findById(userId).orElse(null);
         task.setUser(user);
@@ -81,5 +81,15 @@ public class UserService {
             taskRepository.save(task);
         }
         return task;
+    }
+
+    public User updateUser(User user, Integer userId){
+        User updatedUser = userRepository.findById(userId).orElse(null);
+        if(updatedUser != null){
+            updatedUser.setName(user.getName());
+            updatedUser.setEmail(user.getEmail());
+            userRepository.save(updatedUser);
+        }
+        return updatedUser;
     }
 }

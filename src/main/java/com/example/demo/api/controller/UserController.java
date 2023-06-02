@@ -79,4 +79,10 @@ public class UserController {
         Task updatedTask = userService.updateTask(task, Integer.valueOf(taskId));
         return updatedTask != null ? ResponseEntity.ok(updatedTask) : ResponseEntity.notFound().build();
     }
+
+    @PutMapping(value = "/user/{userId}")
+    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable String userId){
+        User updatedUser = userService.updateUser(user, Integer.valueOf(userId));
+        return updatedUser != null ? ResponseEntity.ok(updatedUser) : ResponseEntity.notFound().build();
+    }
 }
